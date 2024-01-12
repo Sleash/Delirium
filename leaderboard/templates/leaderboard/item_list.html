@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <p class="fulltitle">
+        <span class="fti">D</span>efinitive and 
+        <span class="fti">E</span>xhaustive 
+        <span class="fti">L</span>eaderboard of 
+        <span class="fti">I</span>saac 
+        <span class="fti">R</span>anking 
+        <span class="fti">I</span>tems 
+        <span class="fti">U</span>sing 1v1 
+        <span class="fti">M</span>atches
+    </p>
+    <ul>
+        {% for item in page_obj %}
+        <li>
+            <img src="{{base_url_icon}}{{item.icon_source}}" alt="{{item.name}}"> {{item.name}} : {{item.rating}}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="row">
+        <div class="col justify-content-evenly pagination">
+            <span class="step-links">
+                {% for pagenum in page_obj.paginator.page_range %}
+                    {% if pagenum != page_obj.number %}
+                    <a href="?page={{pagenum}}" class="link">{{pagenum}}</a>
+                    {% else %}
+                    <span class="link">{{pagenum}}</span>
+                    {% endif %}
+                {% endfor %}
+            </span>
+        </div>
+    </div>
+
+
+{% endblock %}

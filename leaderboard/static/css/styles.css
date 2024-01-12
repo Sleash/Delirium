@@ -1,0 +1,63 @@
+body {
+    background-color: #603829;
+    font-family: Upheaval;
+    font-size: 1.2em;
+    color: #e6e6e6;
+}
+
+.fulltitle {
+    color: #a0a0a0;
+}   
+
+.fti {
+    color: white;
+    font-size: 1.5em;
+}
+
+li {
+    list-style-type: none;
+}
+
+.link {
+    font-size: 2em;
+    color: #f8ad44;
+    text-decoration: none;
+    text-shadow: 5px 5px 2px black;
+}
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.item {
+    /*box-sizing: content-box;*/
+    border: 30px solid;
+    background-clip: content-box;
+    border-image: url("https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/4/4a/CSS_Border_Infobox.png") 30 fill round;
+    color: #473a3c;
+    image-rendering: pixelated;
+}
+
+.item.novoteyet:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.item.novoteyet:active {
+    transform: scale(0.9);
+}
+
+.item.votedthis {
+    transform: scale(1.1);
+}
+
+.item:not(.novoteyet):not(.votedthis) {
+    opacity: 0.5;
+    transform: scale(0.8);
+}
+
+#countdown {
+    font-size: 3em;
+}

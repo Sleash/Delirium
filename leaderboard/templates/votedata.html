@@ -1,0 +1,45 @@
+<form class="col-3 item 
+{% if voted == '0' %}
+novoteyet
+{% endif %}
+{% if voted == 'A' %}
+votedthis
+{% endif %}
+"
+id="itemA" hx-swap-oob="true"
+{% if voted == '0' %}
+hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
+{% endif %}
+>
+    {% csrf_token %}
+    <input type="hidden" name="vote" value="A">
+    <div class="itemName">{{match.itemA.name}}</div>
+    <img id="imageA" alt="{{match.itemA.name}}"
+    src="{{base_url_icon}}{{match.itemA.icon_source}}"
+    height="96" width="96"
+    />
+    <div class="matchScore" id="scoreA" hx-swap-oob="true">{{match.scoreA}}</div>
+</form>
+
+<form class="col-3 item 
+{% if voted == '0' %}
+novoteyet
+{% endif %}
+{% if voted == 'B' %}
+votedthis
+{% endif %}
+"
+id="itemB" hx-swap-oob="true"
+{% if voted == '0' %}
+hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
+{% endif %}
+>
+    {% csrf_token %}
+    <input type="hidden" name="vote" value="B">
+    <div class="itemName">{{match.itemB.name}}</div>
+    <img id="imageA" alt="{{match.itemB.name}}"
+    src="{{base_url_icon}}{{match.itemB.icon_source}}"
+    height="96" width="96"
+    />
+    <div class="matchScore" id="scoreB" hx-swap-oob="true">{{match.scoreB}}</div>
+</form>
