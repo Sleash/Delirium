@@ -21,7 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-1u!*sjb*dm$!u*2-zz8e!+o76e&5!zxm&$=sr$y5gm4u9ah!nb'
-import os
+import os, dotenv
+dotenv.load_dotenv()
+
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY',
                             'django-insecure-1u!*sjb*dm$!u*2-zz8e!+o76e&5!zxm&$=sr$y5gm4u9ah!nb')
 
@@ -29,8 +31,14 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY',
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['15.236.197.15']
 
+CSRF_TRUSTED_ORIGINS = ['https://15.236.197.15']
+
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # Application definition
 
@@ -105,6 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -139,4 +149,3 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
