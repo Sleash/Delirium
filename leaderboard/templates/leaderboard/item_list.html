@@ -15,7 +15,7 @@
     <ul>
         {% for item in page_obj %}
         <li>
-            <img src="{{base_url_icon}}{{item.icon_source}}" alt="{{item.name}}"> {{item.name}} : {{item.rating}}
+            <img src="{{base_url_icon}}{{item.icon_source}}" alt="{{item.name}}"> <span class="itemNameList">{{item.name}}</span> : <span class="rating">{{item.rating}}</span>
         </li>
         {% endfor %}
     </ul>
@@ -25,9 +25,9 @@
             <span class="step-links">
                 {% for pagenum in page_obj.paginator.page_range %}
                     {% if pagenum != page_obj.number %}
-                    <a href="?page={{pagenum}}" class="link">{{pagenum}}</a>
+                    <a href="?page={{pagenum}}" class="link px-1">{{pagenum}}</a>
                     {% else %}
-                    <span class="link">{{pagenum}}</span>
+                    <span class="link linkhere px-1">{{pagenum}}</span>
                     {% endif %}
                 {% endfor %}
             </span>

@@ -1,4 +1,4 @@
-<form class="col-3 item 
+<form class="col-5 col-md-3 item 
 {% if voted == '0' %}
 novoteyet
 {% endif %}
@@ -21,7 +21,7 @@ hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
     <div class="matchScore" id="scoreA" hx-swap-oob="true">{{match.scoreA}}</div>
 </form>
 
-<form class="col-3 item 
+<form class="col-5 col-md-3 item 
 {% if voted == '0' %}
 novoteyet
 {% endif %}
