@@ -1,5 +1,7 @@
 from datetime import datetime, timezone
+from ipware import get_client_ip
 from typing import Any
+
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import generic
@@ -30,7 +32,7 @@ match = None
 def votedata(request: HttpRequest):
     global match
     match = getCurrentMatch()
-    ip_addr = request.META['REMOTE_ADDR']
+    ip_addr = get_client_ip(request)
     query = Vote.objects.filter(ip_addr=ip_addr).filter(match=match)
     vote = query.first().getVote() if query.exists() else '0'
 
