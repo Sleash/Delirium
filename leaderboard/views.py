@@ -32,7 +32,7 @@ match = None
 def votedata(request: HttpRequest):
     global match
     match = getCurrentMatch()
-    ip_addr = get_client_ip(request)
+    ip_addr, is_routable = get_client_ip(request)
     query = Vote.objects.filter(ip_addr=ip_addr).filter(match=match)
     vote = query.first().getVote() if query.exists() else '0'
 
