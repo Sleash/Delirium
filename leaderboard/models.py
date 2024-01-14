@@ -55,7 +55,7 @@ RATING_RATIO = 480
 K_FACTOR = 32
 
 class Match(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     itemA = models.ForeignKey(Item, on_delete=models.PROTECT, related_name="itemA")
     itemB = models.ForeignKey(Item, on_delete=models.PROTECT, related_name="itemB")
     scoreA = models.IntegerField(default=0)
