@@ -20,5 +20,6 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('streaking/', include('streaking.urls')),
     path('', include('leaderboard.urls')),
 ]

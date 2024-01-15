@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'leaderboard.apps.LeaderboardConfig',
+    'streaking.apps.StreakingConfig',
 ]
 
 MIDDLEWARE = [

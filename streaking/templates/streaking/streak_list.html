@@ -1,0 +1,68 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <div class="row justify-content-center characters">
+        <div class="col-auto">
+            {% for c in characters %}
+            <a href="{% url 'streakingcg' c.id currentgoal %}">
+            <img src="{{base_url_icon}}{{c.icon_source}}"
+            alt="{{c.name}}" id="{{c.id}}" class="character m-1
+            {% if c.id == currentcharacter %}
+            selected
+            {% endif %}  
+            ">
+            </a>
+            {% if forloop.counter == 19 %}
+            <br>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row justify-content-center goals">
+        <div class="col-auto">
+            {% for g in goals %}
+            <a href="{% url 'streakingcg' currentcharacter g.id %}">
+            <img src="{{base_url_icon}}{{g.icon_source}}"
+            alt="{{g.name}}" id="{{g.id}}" class="goal m-1
+            {% if g.id == currentgoal %}
+            selected
+            {% endif %}
+            " height="64" width="64">
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-1 scoresheader">Rank</div>
+            <div class="col-3 col-lg-2 scoresheader">Character</div>
+            <div class="col-3 col-lg-2 scoresheader">Goal</div>
+            <div class="col-3 col-lg-2 scoresheader">Player</div>
+            <div class="col-1 scoresheader">Score</div>
+            <div class="col-1 scoresheader">Status</div>
+        </div>
+
+        {% for streak in streak_list %}
+        <div class="row justify-content-center">
+            <div class="col-1 scoresheader">{{forloop.counter}}</div>
+            <div class="col-3 col-lg-2 colscores">{{streak.character.name}}</div>
+            <div class="col-3 col-lg-2 colscores">{{streak.goal.name}}</div>
+            <div class="col-3 col-lg-2 colscores">
+                <a href="https://www.twitch.tv/{{streak.player}}">{{streak.player}}</a>
+            </div>
+            <div class="col-1 colscores">{{streak.score}}</div>
+            <div class="col-1 colscores">
+                {% if streak.alive %}
+                <span class="alive">Alive</span>
+                {% else %}
+                <span class="dead">Dead</span>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="row justify-content-center">
+            <div class="col-lg-9 colscores">No known scores for this streak currently.</div>
+        </div>
+        {% endfor %}
+{% endblock %}

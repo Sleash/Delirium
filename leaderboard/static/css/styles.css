@@ -19,6 +19,11 @@ li {
     list-style-type: none;
 }
 
+a {
+    text-decoration: none;
+    color: #f8ad44
+}
+
 .link {
     font-size: 2.4em;
     color: #f8ad44;
@@ -83,4 +88,36 @@ li {
 .rating {
     font-size: 1.4em;
     color: #80b0b0;
+}
+
+.character {
+    image-rendering: pixelated;
+}
+
+.goal {
+    image-rendering: pixelated;
+}
+
+.selected {
+    outline: solid red;
+}
+
+.scoresheader {
+    font-family: sans-serif;
+    font-weight: 900;
+    background-color: #101010;
+}
+
+.colscores {
+    font-family: sans-serif;
+    background-color: #202020;
+    outline: solid 1px #101010;
+}
+
+.alive {
+    color: green;
+}
+
+.dead {
+    color: red;
 }
