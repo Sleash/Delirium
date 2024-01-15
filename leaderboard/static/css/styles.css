@@ -98,6 +98,10 @@ a {
     image-rendering: pixelated;
 }
 
+.character:hover, .goal:hover {
+    transform: scale(1.1);
+}
+
 .selected {
     outline: solid red;
 }

@@ -28,26 +28,36 @@
             {% if g.id == currentgoal %}
             selected
             {% endif %}
-            " height="64" width="64">
+            " height="64">
             </a>
             {% endfor %}
         </div>
     </div>
 
+        {% for streak in streak_list %}
+        {% if forloop.first %}
         <div class="row justify-content-center mt-3">
             <div class="col-1 scoresheader">Rank</div>
+            {% if currentcharacter == 'all' %}
             <div class="col-3 col-lg-2 scoresheader">Character</div>
+            {% endif %}
+            {% if currentgoal == 'all' %}
             <div class="col-3 col-lg-2 scoresheader">Goal</div>
+            {% endif %}
             <div class="col-3 col-lg-2 scoresheader">Player</div>
             <div class="col-1 scoresheader">Score</div>
             <div class="col-1 scoresheader">Status</div>
         </div>
+        {% endif %}
 
-        {% for streak in streak_list %}
         <div class="row justify-content-center">
             <div class="col-1 scoresheader">{{forloop.counter}}</div>
+            {% if currentcharacter == 'all' %}
             <div class="col-3 col-lg-2 colscores">{{streak.character.name}}</div>
+            {% endif %}
+            {% if currentgoal == 'all' %}
             <div class="col-3 col-lg-2 colscores">{{streak.goal.name}}</div>
+            {% endif %}
             <div class="col-3 col-lg-2 colscores">
                 <a href="https://www.twitch.tv/{{streak.player}}">{{streak.player}}</a>
             </div>
@@ -61,8 +71,8 @@
             </div>
         </div>
         {% empty %}
-        <div class="row justify-content-center">
-            <div class="col-lg-9 colscores">No known scores for this streak currently.</div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-6 colscores">No known scores for this streak currently.</div>
         </div>
         {% endfor %}
 {% endblock %}

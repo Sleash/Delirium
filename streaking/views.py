@@ -13,7 +13,7 @@ class StreakingView(generic.ListView):
 
     def get_queryset(self):
         query = super().get_queryset()
-        query.filter(approved=True)
+        query = query.filter(approved=True)
         if 'character' in self.kwargs:
             self.character = self.kwargs['character']
             if self.character != 'all':
