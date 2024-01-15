@@ -52,6 +52,7 @@ def scoredata(request: HttpRequest):
     global match
     if match is None:
         match = getCurrentMatch()
+    match.refresh_from_db(fields=['scoreA', 'scoreB'])
     context = {
         'scoreA': match.scoreA,
         'scoreB': match.scoreB
