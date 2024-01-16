@@ -11,16 +11,16 @@
     <div id="itemA"></div>
     <div id="itemB"></div>
 </div>
-<div id="loaddata" hx-get="{% url 'votedata' %}" hx-trigger="newmatch"></div>
+<div id="loaddata" hx-get="{% url 'votedata' %}" hx-trigger="load, newmatch"></div>
 
 <script>
-    let updated = 0;
+    let currentMatch = Math.floor(Date.now()/240000);
     function everySecond(){
         let now = Math.floor(Date.now()/1000); // now in seconds
         let match = Math.floor(now/240); // match pseudo-id
         let timer = 240-(now%240); // time before next match
-        if(match > updated){ // if it's time for a new match, we load expected match data
-            updated = match;
+        if(match > currentMatch){ // if it's time for a new match, we load expected match data
+            currentMatch = match;
             htmx.trigger("#loaddata", "newmatch", {});
         }
         let minutes = Math.floor(timer/60);

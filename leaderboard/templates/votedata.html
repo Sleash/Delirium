@@ -40,7 +40,7 @@ hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
     {% csrf_token %}
     <input type="hidden" name="vote" value="B">
     <div class="itemName">{{match.itemB.name}}</div>
-    <img id="imageA" alt="{{match.itemB.name}}"
+    <img id="imageB" alt="{{match.itemB.name}}"
     src="{{base_url_icon}}{{match.itemB.icon_source}}"
     height="96"
     />
