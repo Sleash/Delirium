@@ -169,3 +169,12 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+
+#CACHES = { # Might need this later
+#    "default": {
+#        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+#        "LOCATION": "/tmp/django_cache",
+#        "TIMEOUT": 240,
+#    }
+#}

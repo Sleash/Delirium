@@ -1,10 +1,10 @@
-from datetime import datetime
+from datetime import datetime, timezone
 import random
 
 from django.db import models
 from django.db.models import F
 
-from .utils import timeToMatchNumber
+from .utils import datetimeToIdMatch, timeToMatchNumber
 
 # Create your models here.
 
@@ -75,6 +75,18 @@ class Match(models.Model):
                 itemA=Item.objects.get(id=A),
                 itemB=Item.objects.get(id=B))
         m.save()
+        return m
+    
+    @classmethod
+    def getCurrent(cls):
+        now = datetime.now(timezone.utc)
+        idm = datetimeToIdMatch(now)
+        m = Match.objects.first()
+        if idm != m.id : # Match does not exist yet
+            # Resolve previous match
+            m.fulfill()
+            # then create the new one
+            m = Match.create(idm, now)
         return m
     
     def vote(self, ip_addr, vote):

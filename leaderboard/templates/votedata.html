@@ -16,9 +16,12 @@ hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
     <div class="itemName">{{match.itemA.name}}</div>
     <img id="imageA" alt="{{match.itemA.name}}"
     src="{{base_url_icon}}{{match.itemA.icon_source}}"
-    height="96" width="96"
+    height="96"
     />
+    {% if voted != '0' %}
     <div class="matchScore" id="scoreA" hx-swap-oob="true">{{match.scoreA}}</div>
+    <div hx-get="{% url 'scoredata' %}" hx-trigger="every 5s"></div>
+    {% endif %}
 </form>
 
 <form class="col-5 col-md-3 item 
@@ -39,7 +42,9 @@ hx-post="{% url 'votedata' %}" hx-trigger="click" hx-swap="none"
     <div class="itemName">{{match.itemB.name}}</div>
     <img id="imageA" alt="{{match.itemB.name}}"
     src="{{base_url_icon}}{{match.itemB.icon_source}}"
-    height="96" width="96"
+    height="96"
     />
+    {% if voted != '0' %}
     <div class="matchScore" id="scoreB" hx-swap-oob="true">{{match.scoreB}}</div>
+    {% endif %}
 </form>

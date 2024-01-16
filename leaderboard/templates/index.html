@@ -12,7 +12,6 @@
     <div id="itemB"></div>
 </div>
 <div id="loaddata" hx-get="{% url 'votedata' %}" hx-trigger="newmatch"></div>
-<div hx-get="{% url 'scoredata' %}" hx-trigger="every 5s"></div>
 
 <script>
     let updated = 0;

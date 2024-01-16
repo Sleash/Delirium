@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from ipware import get_client_ip
 from typing import Any
 
@@ -6,32 +5,17 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from .utils import datetimeToIdMatch
 from .models import Item, Match, Vote
 
 BASE_URL_ICON = 'https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/'
-
-def getCurrentMatch():
-    now = datetime.now(timezone.utc)
-    idm = datetimeToIdMatch(now)
-    m = Match.objects.first()
-    if idm != m.id : # Match does not exist yet
-        # Resolve previous match
-        m.fulfill()
-        # then create the new one
-        m = Match.create(idm, now)
-    return m
 
 # Create your views here.
 def index(request: HttpRequest):
     context = {}
     return render(request, 'index.html', context=context)
 
-match = None
-
 def votedata(request: HttpRequest):
-    global match
-    match = getCurrentMatch()
+    match = Match.getCurrent()
     ip_addr, is_routable = get_client_ip(request)
     query = Vote.objects.filter(ip_addr=ip_addr).filter(match=match)
     vote = query.first().getVote() if query.exists() else '0'
@@ -49,10 +33,8 @@ def votedata(request: HttpRequest):
     return render(request, 'votedata.html', context=context)
 
 def scoredata(request: HttpRequest):
-    global match
-    if match is None:
-        match = getCurrentMatch()
-    match.refresh_from_db(fields=['scoreA', 'scoreB'])
+    match = Match.getCurrent()
+    # match.refresh_from_db(fields=['scoreA', 'scoreB'])
     context = {
         'scoreA': match.scoreA,
         'scoreB': match.scoreB
