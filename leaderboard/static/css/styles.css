@@ -106,16 +106,8 @@ a {
     outline: solid red;
 }
 
-.scoresheader {
+table {
     font-family: sans-serif;
-    font-weight: 900;
-    background-color: #101010;
-}
-
-.colscores {
-    font-family: sans-serif;
-    background-color: #202020;
-    outline: solid 1px #101010;
 }
 
 .alive {

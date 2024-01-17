@@ -2,77 +2,89 @@
 
 {% block content %}
 
-    <div class="row justify-content-center characters">
-        <div class="col-auto">
-            {% for c in characters %}
-            <a href="{% url 'streakingcg' c.id currentgoal %}">
-            <img src="{{base_url_icon}}{{c.icon_source}}"
-            alt="{{c.name}}" id="{{c.id}}" class="character m-1
+<div class="row justify-content-center characters">
+    <div class="col-auto">
+        {% for c in characters %}
+        <a href="{% url 'streakingcg' c.id currentgoal %}">
+            <img src="{{base_url_icon}}{{c.icon_source}}" alt="{{c.name}}" id="{{c.id}}" class="character m-1
             {% if c.id == currentcharacter %}
             selected
             {% endif %}  
             ">
-            </a>
-            {% if forloop.counter == 19 %}
-            <br>
-            {% endif %}
-            {% endfor %}
-        </div>
+        </a>
+        {% if forloop.counter == 19 %}
+        <br>
+        {% endif %}
+        {% endfor %}
     </div>
-    <div class="row justify-content-center goals">
-        <div class="col-auto">
-            {% for g in goals %}
-            <a href="{% url 'streakingcg' currentcharacter g.id %}">
-            <img src="{{base_url_icon}}{{g.icon_source}}"
-            alt="{{g.name}}" id="{{g.id}}" class="goal m-1
+</div>
+<div class="row justify-content-center goals">
+    <div class="col-auto">
+        {% for g in goals %}
+        <a href="{% url 'streakingcg' currentcharacter g.id %}">
+            <img src="{{base_url_icon}}{{g.icon_source}}" alt="{{g.name}}" id="{{g.id}}" class="goal m-1
             {% if g.id == currentgoal %}
             selected
             {% endif %}
             " height="64">
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-
-        {% for streak in streak_list %}
-        {% if forloop.first %}
-        <div class="row justify-content-center mt-3">
-            <div class="col-1 scoresheader">Rank</div>
-            {% if currentcharacter == 'all' %}
-            <div class="col-3 col-lg-2 scoresheader">Character</div>
-            {% endif %}
-            {% if currentgoal == 'all' %}
-            <div class="col-3 col-lg-2 scoresheader">Goal</div>
-            {% endif %}
-            <div class="col-3 col-lg-2 scoresheader">Player</div>
-            <div class="col-1 scoresheader">Score</div>
-            <div class="col-1 scoresheader">Status</div>
-        </div>
-        {% endif %}
-
-        <div class="row justify-content-center">
-            <div class="col-1 scoresheader">{{forloop.counter}}</div>
-            {% if currentcharacter == 'all' %}
-            <div class="col-3 col-lg-2 colscores">{{streak.character.name}}</div>
-            {% endif %}
-            {% if currentgoal == 'all' %}
-            <div class="col-3 col-lg-2 colscores">{{streak.goal.name}}</div>
-            {% endif %}
-            <div class="col-3 col-lg-2 colscores">
-                <a href="https://www.twitch.tv/{{streak.player}}">{{streak.player}}</a>
-            </div>
-            <div class="col-1 colscores">{{streak.score}}</div>
-            <div class="col-1 colscores">
-                {% if streak.alive %}
-                <span class="alive">Alive</span>
-                {% else %}
-                <span class="dead">Dead</span>
-                {% endif %}
-            </div>
-        </div>
-        {% empty %}
-        <div class="row justify-content-center mt-3">
-            <div class="col-lg-6 colscores">No known scores for this streak currently.</div>
-        </div>
+        </a>
         {% endfor %}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col col-lg-9">
+        <table class="mt-4 table table-dark table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    {% if currentcharacter == 'all' %}
+                    <th scope="col">Character</th>
+                    {% endif %}
+                    {% if currentgoal == 'all' %}
+                    <th scope="col">Goal</th>
+                    {% endif %}
+                    <th scope="col">Player</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">EBSI</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for streak in streak_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    {% if currentcharacter == 'all' %}
+                    <td>{{streak.character.name}}</td>
+                    {% endif %}
+                    {% if currentgoal == 'all' %}
+                    <td>{{streak.goal.name}}</td>
+                    {% endif %}
+                    <td>
+                        <a href="https://www.twitch.tv/{{streak.player}}">{{streak.player}}</a>
+                    </td>
+                    <td>
+                        {% if streak.vod %}
+                        <a href="{{streak.vod}}">{{streak.score}}</a>
+                        {% else %}
+                        {{streak.score}}
+                        {% endif %}
+                    </td>
+                    <td>{{streak.ebsi|default_if_none:"-" }}</td>
+                    <td>
+                        {% if streak.alive %}
+                        <span class="alive">Alive</span>
+                        {% else %}
+                        <span class="dead">Dead</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <td colspan="7">No known scores for this streak currently.</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}
