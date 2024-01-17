@@ -96,8 +96,11 @@ class Streak(models.Model):
     player = models.CharField(max_length=50)
     score = models.IntegerField()
     alive = models.BooleanField()
-    gameVersion = models.CharField(max_length=50, blank=True)
+    vod = models.URLField(verbose_name="VOD", blank=True, null=True)
+    game_version = models.CharField(max_length=50, blank=True)
+    ebsi = models.PositiveSmallIntegerField(verbose_name="EBSI", choices={i: i for i in range(11)}, blank=True, null=True)
+    optional_comment = models.TextField(max_length=637, blank=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-score', '-alive']
+        ordering = ['-score', 'ebsi', '-alive']

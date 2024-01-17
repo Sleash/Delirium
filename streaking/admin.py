@@ -13,4 +13,5 @@ class GoalAdmin(admin.ModelAdmin):
 
 @admin.register(Streak)
 class StreakAdmin(admin.ModelAdmin):
-    list_display = ('character', 'goal', 'player', 'score', 'alive', 'approved')
+    list_display = ('character', 'goal', 'player', 'score', 'alive',
+                    'vod', 'game_version', 'ebsi', 'optional_comment', 'approved')

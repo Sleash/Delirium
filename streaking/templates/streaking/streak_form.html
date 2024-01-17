@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-auto">
+<form action="" method="post" class="submit">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit streak">
+</form>
+    </div>
+</div>
+
+<div class="row justify-content-center submit mt-4">
+    <div class="col col-md-6">
+    <p><em><b>What's EBSI ?</b></em></p>
+    <p>
+        <img src="https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/5/5f/Collectible_Eden%27s_Blessing_icon.png/revision/latest?cb=20210821163100">
+        <b>Eden's Blessing Stack Index</b>, or EBSI, is a value defined as the maximum amount of Eden's Blessings
+        collected in a single run of a given streak, between 0 and 10. Typical values can be :
+        <ul class="linostyle">
+            <li><b>10</b> for gamebreaking players.</li>
+            <li><b>1 or 2</b> for regular non-gamebreaking gameplay.</li>
+            <li><b>0</b> for extra challenge streaks where each run is self-contained.</li>
+        </ul>
+        Providing an EBSI value is optional and any value is of course allowed.
+        It merely serves as an extra at will restriction,
+        as Eden's Blessing's unique mechanic can be considered overpowered in a game of independant runs.
+
+    </p>
+    </div>
+</div>
+{% endblock %}

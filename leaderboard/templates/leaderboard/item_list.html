@@ -14,7 +14,7 @@
     </p>
     <ul>
         {% for item in page_obj %}
-        <li>
+        <li class="linostyle">
             <img src="{{base_url_icon}}{{item.icon_source}}" alt="{{item.name}}"> <span class="itemNameList">{{item.name}}</span> : <span class="rating">{{item.rating}}</span>
         </li>
         {% endfor %}
