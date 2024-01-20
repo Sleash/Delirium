@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+import os, dotenv
+dotenv.load_dotenv()
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(os.environ.get('SECRET_ADMIN_URL')+ '/admin/', admin.site.urls),
     path('streaking/', include('streaking.urls')),
     path('', include('leaderboard.urls')),
 ]
