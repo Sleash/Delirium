@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     path('submit/', views.StreakCreate.as_view(), name='submit'),
     path('<character>/<goal>/', views.StreakingView.as_view(), name='streakingcg'),
-    path('', RedirectView.as_view(url='all/all/', permanent=True)),
+    path('', RedirectView.as_view(url='all/all/', permanent=True), name='streaking'),
 ]

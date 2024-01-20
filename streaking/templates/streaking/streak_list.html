@@ -1,6 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div class="row justify-content-evenly pb-1">
+    <div class="col-md-9"></div>
+    <div class="col col-md-auto text-md-end">
+        <a href="{% url 'submit' %}" class="submitlink">Add your streak</a>
+    </div>
+</div>
 
 <div class="row justify-content-center characters">
     <div class="col-auto">
@@ -9,7 +15,10 @@
             <img src="{{base_url_icon}}{{c.icon_source}}" alt="{{c.name}}" id="{{c.id}}" class="character m-1
             {% if c.id == currentcharacter %}
             selected
-            {% endif %}  
+            {% endif %}
+            {% if c.id == 'trandom' %}
+            rot180
+            {% endif %}
             ">
         </a>
         {% if forloop.counter == 19 %}

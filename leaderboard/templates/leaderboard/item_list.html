@@ -25,9 +25,9 @@
             <span class="step-links">
                 {% for pagenum in page_obj.paginator.page_range %}
                     {% if pagenum != page_obj.number %}
-                    <a href="?page={{pagenum}}" class="link px-1">{{pagenum}}</a>
+                    <a href="?page={{pagenum}}" class="homelink px-1">{{pagenum}}</a>
                     {% else %}
-                    <span class="link linkhere px-1">{{pagenum}}</span>
+                    <span class="homelink linkhere px-1">{{pagenum}}</span>
                     {% endif %}
                 {% endfor %}
             </span>

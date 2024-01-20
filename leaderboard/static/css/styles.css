@@ -24,11 +24,21 @@ a {
     color: #f8ad44
 }
 
-.link {
+.homelink {
     font-size: 2.4em;
-    color: #f8ad44;
-    text-decoration: none;
     text-shadow: 5px 5px 2px black;
+}
+
+.streakinglink {
+    font-size: 1.5em;
+    color: #903090;
+    text-shadow: 3px 3px 2px black;
+}
+
+.submitlink {
+    font-size: 1.2em;
+    color: #b050b0;
+    text-shadow: 3px 3px 2px black;
 }
 
 .linkhere {
@@ -104,6 +114,14 @@ a {
 
 .selected {
     outline: solid red;
+}
+
+.rot180 {
+    transform: rotate(180deg);
+}
+
+.character.rot180:hover {
+    transform: rotate(180deg) scale(1.1);
 }
 
 table {
