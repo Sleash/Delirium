@@ -42,6 +42,16 @@
 </div>
 
 <div class="row justify-content-center">
+    <div class="col col-md-auto text-md-start mt-4">
+        {% if currentplayer == '' %}
+        <input name="player" type="text" placeholder="Search a player" class="searchbar" oninput="search(this)">
+        {% else %}
+        <div class="playertitle"><a href="https://www.twitch.tv/{{currentplayer}}">{{currentplayer}}</a></div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row justify-content-center">
     <div class="col col-lg-9">
         <table class="mt-4 table table-dark table-striped-columns">
             <thead>
@@ -53,7 +63,9 @@
                     {% if currentgoal == 'all' %}
                     <th scope="col">Goal</th>
                     {% endif %}
+                    {% if currentplayer == '' %}
                     <th scope="col">Player</th>
+                    {% endif %}
                     <th scope="col">Score</th>
                     <th scope="col">EBSI</th>
                     <th scope="col">Status</th>
@@ -69,9 +81,11 @@
                     {% if currentgoal == 'all' %}
                     <td>{{streak.goal.name}}</td>
                     {% endif %}
+                    {% if currentplayer == '' %}
                     <td>
-                        <a href="https://www.twitch.tv/{{streak.player}}">{{streak.player}}</a>
+                        <a href="{% url 'streakingp' streak.player %}" class="player">{{streak.player}}</a>
                     </td>
+                    {% endif %}
                     <td>
                         {% if streak.vod %}
                         <a href="{{streak.vod}}">{{streak.score}}</a>
@@ -96,4 +110,16 @@
     </div>
 </div>
 
+<script>
+    function search(field){
+        const filter = field.value.toUpperCase();
+        const table = document.querySelector('table');
+        const tr = table.querySelectorAll('tr');
+
+        for(i = 1; i < tr.length; i++){
+                const p = tr[i].getElementsByClassName("player")[0].innerText;
+                tr[i].style.display = (p.toUpperCase().indexOf(filter) > -1) ? "" : "none";
+        }
+    }
+</script>
 {% endblock %}

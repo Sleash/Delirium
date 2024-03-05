@@ -136,6 +136,17 @@ table {
     color: red;
 }
 
+.searchbar {
+    font-family: sans-serif;
+}
+
+.playertitle {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    text-shadow: 0px 0px 10px gray;
+}
+
 .submit {
     font-family: sans-serif;
 }

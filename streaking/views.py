@@ -12,6 +12,10 @@ class StreakingView(generic.ListView):
     model = Streak
 
     def get_queryset(self):
+        self.character = 'all'
+        self.goal = 'all'
+        self.player = ''
+
         query = super().get_queryset()
         query = query.filter(approved=True)
         if 'character' in self.kwargs:
@@ -22,6 +26,9 @@ class StreakingView(generic.ListView):
             self.goal = self.kwargs['goal']
             if self.goal != 'all':
                 query = query.filter(goal__id=self.goal)
+        if 'player' in self.kwargs:
+            self.player = self.kwargs['player']
+            query = query.filter(player__iexact=self.player)
         return query
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -32,6 +39,7 @@ class StreakingView(generic.ListView):
             'goals': Goal.objects.all(),
             'currentcharacter': self.character,
             'currentgoal': self.goal,
+            'currentplayer': self.player,
         }
         return context
     
@@ -40,7 +48,7 @@ class StreakCreate(generic.CreateView):
     model = Streak
     fields = ['player', 'character', 'goal', 'score', 'alive', 
               'vod', 'game_version', 'ebsi', 'optional_comment']
-    success_url = '/streaking/all/all/'
+    success_url = '/streaking/'
     initial = {
         'game_version': '1.7.9b',
     }
